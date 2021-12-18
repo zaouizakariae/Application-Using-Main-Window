@@ -16,11 +16,13 @@ A main window provides a framework for building an application's user interface.
     - [Save File action](#Save-File-action)
     - [Opening files](#Opening-files)
     - [Open File action](#Open-File-action)
-- [Enhancements](#enhancements)
-  - [Adding a screen where the operations performed are displayed](#adding-a-screen-where-the-operations-performed-are-displayed)
-  - [Adding the reset button (C)](#adding-the-reset-button)
-  - [Scientific mode](#scientific-mode)
- 
+  - [show the recent files](#show-the-recent-files)
+  - [New File](#New-File)
+  - [Edit Actions](#Edit-Actions)
+    - [Copy](#Copy)
+    - [Paste](#Paste)
+    - [Cut](#Cut)
+  
   # SpreadSheet
   ## Context
   
@@ -447,6 +449,7 @@ void SpreadSheet::NEW(){
     setWindowTitle("untiteld");
 }
 ```
+#Edit Actions
 ## Copy
 we will create the copy slot
 - So first we will create a slot to respond to the action trigger in the header.
