@@ -47,7 +47,10 @@ connect(spreadsheet, &QTableWidget::cellClicked, this,  &SpreadSheet::updateStat
 ```
 ## Go Cell
 Now we will add the function for the goCell action. For that, we need to create a Dialog for the user to select a cell.
->_we already did it in  Go [GoDialog](https://anassbelcaid.github.io/CS311/designer/#godialog)_
+>_we already did it in  Go [GoDialog](https://anassbelcaid.github.io/CS311/designer/#godialog)_<
+
+![godidalog_ui](https://user-images.githubusercontent.com/85891554/146639415-c232636a-3a04-44db-b72f-0507356af9c3.png)
+
 No we will create connexion between the goCell action:
 First we will create the proper slot called goCellSlot to respond to the action trigger.
 ```cpp
@@ -92,4 +95,4 @@ void SpreadSheet::goCellSlot(){
 }
 ```
 
-connect(goCell, &QAction::triggered, this, &SpreadSheet::goCellSlot);
+
