@@ -151,3 +151,9 @@ void SpreadSheet::findSlot(){
      }
      }
 ```
+![Capture d’écran 2021-12-18 123506](https://user-images.githubusercontent.com/85891554/146652903-7b59c343-1850-4ba7-ade1-e13300ed1de8.png)
+![Capture d’écran 2021-12-18 123637](https://user-images.githubusercontent.com/85891554/146652906-ca84dfd0-ff91-4445-bf4f-da904aefe3c6.png)
+
+_if the word we want to find doesn't exist , an error message appears
+
+
