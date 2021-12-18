@@ -5,7 +5,7 @@ A main window provides a framework for building an application's user interface.
   _For further details you can check [QMainWindow](https://doc.qt.io/qt-5/qmainwindow.html) documentation ._
   
 # Table of Content  
- - [SpreadSheet](#SpreadSheet)
+- [SpreadSheet](#SpreadSheet)
   - [Context](#Context)
   - [Setup](#Setup)
   - [StatusBar](#StatusBar)
