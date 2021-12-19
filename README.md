@@ -25,7 +25,14 @@ A main window provides a framework for building an application's user interface.
     - [Copy](#Copy)
     - [Paste](#Paste)
     - [Cut](#Cut)
-  
+- [Text Editor](#Text-Editor)
+  - [Design the text editor](#Design-the-text-editor)
+  - [Adding actions](#Adding-actions)
+  - [open file](#open-file)
+  - [New file](#New-file)
+  - [Save file](#Save-file)
+- [Conclusion](#Conclusion)
+ 
   # SpreadSheet
   ## Context
   
@@ -433,6 +440,8 @@ auto b = dynamic_cast<QAction*>(sender());
 }
 
 ```
+
+
 ## New File
 Now we will implement a NEW Slot that create new file and make the connection with the newfile action
 - So first we will create a slot to respond to the action trigger in the header.
@@ -534,5 +543,121 @@ For this task we are going to use QtDesigner  to implement the toolbar , menubar
 
 _this is the final result_
 
+![Capture d’écran 2021-12-19 012608](https://user-images.githubusercontent.com/85891554/146659200-82265144-fb94-4d75-ad99-dc7547d210e0.png)
+
+## Adding actions
+
+some actions are already implemented in the [QPlainTextEdit](https://doc.qt.io/qt-5/qplaintextedit.html) (cut,copy and paste)
+
+```cpp
+void textEditor::on_action_Copy_triggered()
+{
+    ui->plainTextEdit->copy();
+    // update the status bar
+    ui->statusbar->showMessage("Copying the current selection");
+
+}
+```
+
+>_Copy_
+
+```cpp
+void textEditor::on_action_Paste_triggered()
+{
+   ui->plainTextEdit->paste();
+   ui->statusbar->showMessage("Pasting the previous copied selection");
+
+}
+```
+
+>_Paste_
+
+```cpp
+void textEditor::on_action_Cut_triggered()
+{
+    ui->plainTextEdit->cut();
+    ui->statusbar->showMessage("Cutting the current selection");
+
+}
+```
+
+>_Cut_
+
+  
+##open file
+the implementation of open function
+```cpp
+void textEditor::on_actionOpen_triggered()
+{
+    QString filename= QFileDialog::getOpenFileName(this,"Open the file");
+    QFile file(filename);
+    currentFile = filename;
+    if(!file.open(QIODevice::ReadOnly | QFile::Text))
+        QMessageBox::warning(this,"Warning","Cannot open file :"+file.errorString());
+    setWindowTitle(filename);
+    QTextStream in(&file);
+    QString text = in.readAll();
+    ui->plainTextEdit->setPlainText(text);
+    file.close();
+    ui->statusbar->showMessage("Opening the chosen file...");
+}
+```
+##New file
+
+the implementation to create a new textfile
+
+```cpp
+void textEditor::on_actionNew_triggered()
+{
+    currentFile.clear();
+    currentFile=nullptr;
+    ui->plainTextEdit->setPlainText(QString());
+    ui->statusbar->showMessage("Creating a new file");
+}
+```
+
+## Save file
+
+the implementation to save a file
+
+```cpp
+void textEditor::on_actionSave_triggered()
+{
+    auto dialog = new QFileDialog(this);
+    if(currentFile == "")
+    {
+      currentFile = dialog->getSaveFileName(this,"choose your file");
+       setWindowTitle(currentFile);
+    }
+   if( currentFile != "")
+   {
+           saveContent(currentFile);
+   }
+}
+```
+
+now we wre are going tpo add the savContent function
+
+```cpp
+void textEditor::saveContent(QString filename)
+{
+    //Gettign a pointer on the file
+    QFile file(filename);
+
+    //Openign the file
+    if(file.open(QIODevice::WriteOnly))  //Opening the file in writing mode
+
+    {          auto text = ui->plainTextEdit->toPlainText();
+
+        QTextStream in(&file);
 
 
+               in << text ;
+           }
+
+
+    file.close();
+
+}
+```
+# ***THE END***
