@@ -441,6 +441,8 @@ auto b = dynamic_cast<QAction*>(sender());
 
 ```
 
+![Capture d’écran 2021-12-19 185449](https://user-images.githubusercontent.com/85891554/146685430-2ba2e6ab-dac2-4e70-aebb-b405d487fb2a.png)
+
 
 ## New File
 Now we will implement a NEW Slot that create new file and make the connection with the newfile action
