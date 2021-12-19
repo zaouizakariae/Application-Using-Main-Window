@@ -266,6 +266,61 @@ void SpreadSheet::saveSlot()
    }
 }
 ```
+we create another slot to save as a csv
+```cpp
+void SpreadSheet::saveascsvslot() {
+// tester si on possede un nom de fichier
+if(!currentFile)
+{
+   
+    QFileDialog d;
+
+    // get the filename
+    auto filename = d.getSaveFileName();
+    // change the current file name
+    currentFile = new QString(filename);
+    // mettre a jour le titre de le fenetre
+    setWindowTitle(*currentFile);
+
+}
+// call the savecsvcontent function
+saveascsvContent(*currentFile);
+
+}
+```
+the implementation of the savecsvContent function
+
+```cpp
+void SpreadSheet::saveascsvContent(QString filename) {
+    QFile file(filename);
+
+   int rows = spreadsheet->rowCount();
+   int columns = spreadsheet->columnCount();
+   if(file.open(QIODevice::WriteOnly )) {
+
+       QTextStream out(&file);
+
+
+   for (int i = 0; i < rows; i++) {
+       for (int j = 0; j < columns; j++) {
+
+           auto cell = spreadsheet->item(i,j);
+           if(cell)
+               out<< cell->text()<<",";
+           else
+               out<< " "<<",";
+
+       }
+        out<< Qt::endl;
+
+   }
+
+
+   file.close();
+}
+}
+
+```
 ## Opening files
 We will start by writing a private function opencontent(QSTring filename) to open the content on our spreadsheet from a text file ,CSV file or the normal form.
 - We will add the declaration in the header file
